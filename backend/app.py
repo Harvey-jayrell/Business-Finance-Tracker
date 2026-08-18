@@ -1,7 +1,11 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 def create_app(config_name):
 	app = Flask(__name__)
+
+	@app.route("/api/health")
+	def health():
+		return jsonify({"status": "ok"})
 
 	if config_name == "development":
 		app.config["DATABASE_URL"] = "development database"
