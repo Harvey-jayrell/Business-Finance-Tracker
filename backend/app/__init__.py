@@ -1,21 +1,13 @@
-from flask import Flask, jsonify
+from flask import Flask
+from app.config import get_database_url
+from app.routes.health import health_bp
+from app.extensions import db
 
 def create_app(config_name):
-	app = Flask(__name__)
+    app = Flask(__name__)
 
-	@app.route("/api/health")
-	def health():
-		return jsonify({"status": "ok"})
+    app.config["SQLALCHEMY_DATABASE_URI"] =get_database_url(config_name)
+    db.init_app(app)
+    app.register_blueprint(health_bp)
 
-	if config_name == "development":
-		app.config["DATABASE_URL"] = "development database"
-	
-	elif config_name == "testing":
-		app.config["DATABASE_URL"] = "testing database"
-	
-	elif config_name == "production":
-		app.config["DATABASE_URL"] = "production database"
-	else:
-		raise ValueError("Invalid config_name")
-	
-	return app
+    return app
