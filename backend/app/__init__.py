@@ -14,7 +14,7 @@ def create_app(config_name):
 
     app.config["SQLALCHEMY_DATABASE_URI"] =get_database_url(config_name)
     db.init_app(app)
-    migrate.init_app(app,db)
+    migrate.init_app(app, db)
     app.register_blueprint(health_bp)
 
     return app
