@@ -12,4 +12,6 @@ def get_database_url(config_name):
         raise ValueError("Invalid config_name")
 
     return database_url
-    
+
+def get_jwt_secret_key():
+    return os.getenv("JWT_SECRET_KEY")
