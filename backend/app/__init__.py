@@ -3,6 +3,8 @@ from app.config import get_database_url
 from app.routes.health import health_bp
 from app.extensions import db
 from app.extensions import migrate
+from app.extensions import bcrypt
+from app.routes.auth import auth_bp
 from app.models.user import User
 from app.models.category import Category
 from app.models.expense import Expense
@@ -15,6 +17,8 @@ def create_app(config_name):
     app.config["SQLALCHEMY_DATABASE_URI"] =get_database_url(config_name)
     db.init_app(app)
     migrate.init_app(app, db)
+    bcrypt.init_app(app)
     app.register_blueprint(health_bp)
+    app.register_blueprint(auth_bp)
 
     return app
