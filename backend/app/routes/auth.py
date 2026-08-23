@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.extensions import db, bcrypt
 from app.models.user import User
+from flask_jwt_extended import create_access_token
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -41,4 +42,11 @@ def login():
         if check_password is False:
             return jsonify({"error": "Invalid Credentials"}), 401
         else:
-            return jsonify({"id": user.id, "name": user.name, "email": user.email, "role": user.role}), 200
+            access_token = create_access_token(identity=user.id, additional_claims={"role": user.role})
+            return jsonify({
+                "access_token": access_token,
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
+                "role": user.role
+            }), 200
