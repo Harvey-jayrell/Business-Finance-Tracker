@@ -25,3 +25,20 @@ def register():
     db.session.commit()
 
     return jsonify({"id": new_user.id, "name": new_user.name, "email": new_user.email, "role": new_user.role}), 201
+
+@auth_bp.route("/api/auth/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data.get("email")
+    password = data.get("password")
+
+    user = User.query.filter_by(email=email).first()
+
+    if user is None:
+        return jsonify({"error": "Invalid Credentials"}), 401
+    else:
+        check_password = bcrypt.check_password_hash(user.password_hash, password)
+        if check_password is False:
+            return jsonify({"error": "Invalid Credentials"}), 401
+        else:
+            return jsonify({"id": user.id, "name": user.name, "email": user.email, "role": user.role}), 200
