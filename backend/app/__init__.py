@@ -2,6 +2,7 @@ from flask import Flask
 from app.config import get_database_url
 from app.config import get_jwt_secret_key
 from app.routes.health import health_bp
+from app.routes.expenses import expense_bp
 from app.routes.categories import categories_bp
 from app.extensions import db
 from app.extensions import migrate
@@ -25,6 +26,7 @@ def create_app(config_name):
     bcrypt.init_app(app)
     app.register_blueprint(health_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(expense_bp)
     app.register_blueprint(categories_bp)
 
     return app
