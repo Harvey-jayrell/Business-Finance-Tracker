@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
 from app.extensions import db
 from app.models.category import Category
 from app.auth_utils import permission_check
@@ -39,3 +40,15 @@ def create_category():
         "created_at": category.created_at,
         "updated_at": category.updated_at
     }), 201
+
+@categories_bp.route("/api/categories", methods=["GET"])
+@jwt_required()
+def get_categories():
+    categories = Category.query.all()
+    categories_list = []
+    for category in categories:
+        categories_list.append({
+            "id": category.id,
+            "name": category.name,
+        })
+    return jsonify(categories_list), 200
