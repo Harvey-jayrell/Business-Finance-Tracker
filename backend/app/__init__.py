@@ -8,6 +8,7 @@ from app.extensions import db
 from app.extensions import migrate
 from app.extensions import bcrypt
 from app.extensions import jwt
+from app.extensions import register_error_handlers
 from app.routes.auth import auth_bp
 from app.models.user import User
 from app.models.category import Category
@@ -24,6 +25,7 @@ def create_app(config_name):
     jwt.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
+    register_error_handlers(app)
     app.register_blueprint(health_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(expense_bp)
