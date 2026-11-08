@@ -1,6 +1,6 @@
 from functools import wraps
 from flask import jsonify
-from flask_jwt_extended import jwt_required, get_jwt
+from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
 
 def owner_required(fn):
     @wraps(fn)
@@ -24,3 +24,6 @@ def permission_check(allowed_roles):
             return fn(*args, **kwargs)
         return wrapper
     return decorator
+
+def get_current_user_id() -> int:
+    return int(get_jwt_identity())
