@@ -16,7 +16,7 @@
 ## Definition of "deployed" for V1
 
 - [x] `Dockerfile` builds and runs the backend locally
-- [ ] No secrets in the image or the repo (`DATABASE_URL`, `JWT_SECRET_KEY` come from environment variables)
+- [x] No secrets in the image or the repo (`DATABASE_URL`, `JWT_SECRET_KEY` come from environment variables)
 - [ ] Supabase RLS decision made for the tables (understand it before the API is public)
 - [ ] Test accounts and weak test passwords removed or replaced
 - [ ] A few automated tests (pytest) covering login, role checks, and one expense flow
