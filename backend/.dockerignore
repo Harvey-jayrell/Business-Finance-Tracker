@@ -1,4 +1,7 @@
 venv
-__pycache__
+**/__pycache__
+**/*.pyc
 .env
 .git
+owner.json
+cashier.json
