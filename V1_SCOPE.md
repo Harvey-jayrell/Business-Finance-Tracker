@@ -9,7 +9,7 @@
 - [x] First-owner registration (`POST /api/auth/register`), closed after the first user
 - [x] Login (`POST /api/auth/login`) returns a JWT carrying the user's role
 - [x] Role enforcement: owner / manager / cashier get different access (shown via 401 / 403 / 404 responses)
-- [ ] Categories: create (owner/manager) **and list** (check this exists; a client can't pick a `category_id` without it)
+- [x] Categories: create (owner/manager) **and list** (check this exists; a client can't pick a `category_id` without it)
 - [x] Expenses: create, list (role-scoped), edit (PATCH), soft-delete (cashier needs password re-confirm)
 - [x] Owner can create employee accounts (`POST /api/users`) — verify this is built; otherwise move to Later or build it
 
