@@ -26,6 +26,11 @@ def create_app(config_name):
     migrate.init_app(app, db)
     bcrypt.init_app(app)
     register_error_handlers(app)
+
+    @app.route("/")
+    def index():
+        return {"status": "success", "message": "Business Finance Tracker API is running"}, 200
+
     app.register_blueprint(health_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(expense_bp)
