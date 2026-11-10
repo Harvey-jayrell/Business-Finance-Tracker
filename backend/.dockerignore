@@ -5,3 +5,7 @@ venv
 .git
 owner.json
 cashier.json
+tests/
+.pytest_cache/
+pytest.ini
+requirements-dev.txt
